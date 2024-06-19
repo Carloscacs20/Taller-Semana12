@@ -61,7 +61,7 @@ void buscarporGenero(char peliculas[][4][40]){
 }
 
 
-void comprarTicket(char (*peliculas)[4][40], double *precio, char (*clientes)[2][40], int (*reserva)[4]) {
+void comprarTicket(char peliculas[4][40], double precio, char clientes[2][40], int reserva[4]) {
     char cedula[40];
     int NumPelicula, cantidad, tipoEntrada;
     int clienteIndex = -1;
