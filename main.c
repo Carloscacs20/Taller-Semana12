@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include "funciones.h"
 
+
 int main (int argc, char *argv[]) {
 
-    char peliculas[10][4][40]={{"1","Avatar II","10:20","Fantasia"},
-                               {"2","Intensamente 2","12;30","Animado"},
-                               {"3","Madame Web","1:20","Ciencia Ficcion"},
-                               {"4","Godzilla y Kong","1:20","Ciencia Ficcion"},
-                               {"5","Megamente 2","2:50","Animado"},
-                               {"6","The Blue Angels","3:00","Ciencia Ficcion"},
-                               {"7","Duna Parte Dos","3:00","Aventura"},
-                               {"8","El correo","4:20","Suspenso"},
-                               {"9","El duro de Matar","5:30","Acccion"},
-                               {"10","Jueguete Diabolico","7:50","Terror"}};
+    char peliculas[10][4][40]={{"1","AvatarII","10:20","Fantasia"},
+                               {"2","Jurassic-Park","12;30","Ciencia-Ficcion"},
+                               {"3","Intensa-Mente","1:20","Animado"},
+                               {"4","Godzilla","1:20","Ciencia-Ficcion"},
+                               {"5","MegamenteII","2:50","Animado"},
+                               {"6","Ted","3:00","Comedia"},
+                               {"7","Up","3:00","Animado"},
+                               {"8","Deadpool","4:20","Accion"},
+                               {"9","Mision-Imposible","5:30","Accion"},
+                               {"10","It","7:50","Terror"}};
     double precio[3]={7,3.5,3};
     char clientes[5][2][40]={{"",""},
                              {"Luis","123456788"},
@@ -59,12 +60,12 @@ int main (int argc, char *argv[]) {
             default:
                 break;
            }
-             break;
+           break;
         case 4:
-            /*comprarTicket(peliculas,precio,clientes,reserva);
+            comprarTicket(peliculas,precio,clientes,reserva);
             break;
         case 5:
-            verCompras(peliculas,precio,clientes,reserva);
+            /*verCompras(peliculas,precio,clientes,reserva);
             break;*/
         default:
 
