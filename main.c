@@ -21,7 +21,7 @@ int main (int argc, char *argv[]) {
                              {"",""},
                              {"",""}};
 
-    int reserva[10][4]={{0,1,2,1},
+    int reserva[10][4]={{-1,-1,-1,-1},
                          {-1,-1,-1,-1},
                          {-1,-1,-1,-1},
                          {-1,-1,-1,-1},
@@ -65,8 +65,8 @@ int main (int argc, char *argv[]) {
             comprarTicket(peliculas,precio,clientes,reserva);
             break;
         case 5:
-            /*verCompras(peliculas,precio,clientes,reserva);
-            break;*/
+            verCompras(peliculas,precio,clientes,reserva);
+            break;
         default:
 
             break;
