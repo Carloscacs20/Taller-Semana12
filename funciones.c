@@ -147,9 +147,9 @@ void verCompras(char peliculas[][4][40], double precio[], char clientes[][2][40]
             double precioEntrada = precio[tipoEntrada];
             double precioTotal = cantidad * precioEntrada;
 
-            printf("  Pelicula: %s, Hora: %s, Genero: %s, Cantidad: %d, Precio Total: $%.2f\n",
+            printf("  Pelicula: %s, Hora: %s, Genero: %s, Cantidad: %d, Precio de entrada: $%.2f\n",
                    peliculas[peliculaIndex][1], peliculas[peliculaIndex][2], peliculas[peliculaIndex][3],
-                   cantidad, precioTotal);
+                   cantidad, precioEntrada);
 
             totalPrecio += precioTotal;
         }
