@@ -61,52 +61,58 @@ void buscarporGenero(char peliculas[][4][40]){
 }
 
 
-void comprarTicket(char peliculas[][4][40], double precio[], char clientes[][2][40], int reserva[][4]) {
-    int numPelicula;
+void comprarTicket(char (*peliculas)[4][40], double *precio, char (*clientes)[2][40], int (*reserva)[4]) {
     char cedula[40];
-    printf("\nIngrese el numero de la pelicula que desea ver: ");
-    scanf("%d", &numPelicula);
+    int NumPelicula, cantidad, tipoEntrada;
+    int clienteIndex = -1;
 
-    if (numPelicula < 1 || numPelicula > 10) {
-        printf("Numero de pelicula inválido.\n");
-        return;
-    }
-
-    printf("Ingrese la cedula del cliente: ");
+    printf("Ingrese su cedula: ");
     scanf("%s", cedula);
 
-    int numCliente = -1;
     for (int i = 0; i < 5; i++) {
         if (strcmp(clientes[i][1], cedula) == 0) {
-            numCliente = i;
+            clienteIndex = i;
             break;
         }
     }
 
-    if (numCliente == -1) {
-        printf("Cliente no encontrado o cédula inválida.\n");
+    if (clienteIndex == -1) {
+        printf("Cedula no encontrada.\n");
         return;
     }
 
-    printf("Escoja el tipo de asiento:\n1. VIP 7.00\n2. Normal 3.50\n3. Económico 3.00\n>> ");
-    int tipoAsiento;
-    scanf("%d", &tipoAsiento);
+    printf("Ingrese el numero de la pelicula: ");
+    scanf("%d", &NumPelicula);
 
-    if (tipoAsiento < 1 || tipoAsiento > 3) {
-        printf("Tipo de asiento invalido.\n");
+    if (NumPelicula < 1 || NumPelicula > 10) {
+        printf("El numero de la pelicula no es el correcto.\n");
         return;
     }
 
-    for (int i = 0; i < 10; i++) {
-        if (reserva[i][0] == -1) {
-            reserva[i][0] = numPelicula - 1;
-            reserva[i][1] = numCliente;
-            reserva[i][2] = tipoAsiento;
-            reserva[i][3] = 1; 
-            printf("Ticket comprado exitosamente.\n");
-            return;
+    printf("Ingrese la cantidad de entradas: ");
+    scanf("%d", &cantidad);
+
+    printf("Tipos de entrada: 0 - Normal ($7), 1 - Ninos ($3.5), 2- Adulto mayor ($3)\n");
+    printf("Ingrese el tipo de entrada: ");
+    scanf("%d", &tipoEntrada);
+
+    if (tipoEntrada < 0 || tipoEntrada > 2) {
+        printf("Tipo de entrada invalido.\n");
+        return;
+    }
+
+    for (int i = 0; i < cantidad; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (reserva[NumPelicula-1][j] == -1) {
+                reserva[NumPelicula-1][j] = clienteIndex;
+                break;
+            }
         }
     }
+
+    double total = cantidad * precio[tipoEntrada];
+    printf("Compra realizada exitosamente. Total: $%.2f\n", total);
+}
 
     printf("No hay espacios disponibles para nuevas reservas.\n");
 }
