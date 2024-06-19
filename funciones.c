@@ -63,7 +63,7 @@ void buscarporGenero(char peliculas[][4][40]){
 
 void comprarTicket(char peliculas[][4][40], double precio[], char clientes[][2][40], int reserva[][4]) {
     char cedula[40];
-    int NumPelicula, cantidad, tipoEntrada;
+    int NumPelicula, cantidad, tipoEntrada, totalEntradas = 0;
     int clienteIndex = -1;
 
     printf("Ingrese su cedula: ");
@@ -89,32 +89,33 @@ void comprarTicket(char peliculas[][4][40], double precio[], char clientes[][2][
         return;
     }
 
-    do {
-        printf("Ingrese la cantidad de entradas (debe ser mayor que cero): ");
-        scanf("%d", &cantidad);
-    } while (cantidad <= 0);
+    double total = 0.0;
+    for (int i = 0; i < 3; i++) {
+        do {
+            printf("Ingrese la cantidad de entradas para el tipo %d (0 - Normal 7.00, 1 - Ninos 3.50, 2 - Adulto mayor 3): ", i);
+            scanf("%d", &cantidad);
+        } while (cantidad < 0);
 
-    printf("Tipos de entrada: 0 - Normal ($7), 1 - Ninos ($3.5), 2 - Adulto mayor ($3)\n");
-    printf("Ingrese el tipo de entrada: ");
-    scanf("%d", &tipoEntrada);
-
-    if (tipoEntrada < 0 || tipoEntrada > 2) {
-        printf("Tipo de entrada invalido.\n");
-        return;
-    }
-
-    for (int i = 0; i < 10; i++) {
-        if (reserva[i][0] == -1) {
-            reserva[i][0] = NumPelicula - 1;
-            reserva[i][1] = clienteIndex;
-            reserva[i][2] = cantidad;
-            reserva[i][3] = tipoEntrada;
-            break;
+        if (cantidad > 0) {
+            for (int j = 0; j < 10; j++) {
+                if (reserva[j][0] == -1) {
+                    reserva[j][0] = NumPelicula - 1;
+                    reserva[j][1] = clienteIndex;
+                    reserva[j][2] = cantidad;
+                    reserva[j][3] = i;
+                    total += cantidad * precio[i];
+                    totalEntradas += cantidad;
+                    break;
+                }
+            }
         }
     }
 
-    double total = cantidad * precio[tipoEntrada];
-    printf("Compra realizada exitosamente. Total: $%.2f\n", total);
+    if (totalEntradas == 0) {
+        printf("No se ingresaron entradas.\n");
+    } else {
+        printf("Compra realizada exitosamente. Total: $%.2f\n", total);
+    }
 }
 
 void verCompras(char peliculas[][4][40], double precio[], char clientes[][2][40], int reserva[][4]) {
@@ -147,9 +148,9 @@ void verCompras(char peliculas[][4][40], double precio[], char clientes[][2][40]
             double precioEntrada = precio[tipoEntrada];
             double precioTotal = cantidad * precioEntrada;
 
-            printf("  Pelicula: %s, Hora: %s, Genero: %s, Cantidad: %d, Precio de entrada: $%.2f\n",
+            printf("  Pelicula: %s, Hora: %s, Genero: %s, Cantidad: %d, Precio de entrada: $%.2f, Precio Total: $%.2f\n",
                    peliculas[peliculaIndex][1], peliculas[peliculaIndex][2], peliculas[peliculaIndex][3],
-                   cantidad, precioEntrada);
+                   cantidad, precioEntrada, precioTotal);
 
             totalPrecio += precioTotal;
         }
