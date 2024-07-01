@@ -24,14 +24,20 @@ void imprimirClientes(char clientes[][2][40]){
     }   
 }
 
-void listarPeliculas(char peliculas[][4][40]){
+void listarPeliculas(char peliculas[][4][40]) {
+    FILE *fp = fopen("ListarP.txt", "w");
+    if (fp != NULL) {
+        printf("Se abrio correctamente el archivo ListarP.txt\n");
 
-    printf("Numero\t\tPelicula\t\t\tHora\t\tGenero\n");
-    for (int i = 0; i < 10; i++)
-    {
-        printf("\n%s\t\t%s\t\t\t%s\t\t%s\n",peliculas[i][0],peliculas[i][1],peliculas[i][2],peliculas[i][3]);
+        fprintf(fp, "Numero\t\tPelicula\t\t\tHora\t\tGenero\n");
+        for (int i = 0; i < 10; i++) {
+            fprintf(fp, "%s\t\t%s\t\t%s\t\t%s\n", peliculas[i][0], peliculas[i][1], peliculas[i][2], peliculas[i][3]);
+        }
+
+        fclose(fp);
+    } else {
+        printf("No se pudo abrir el archivo ListarP.txt\n");
     }
-
 }
 
 void buscarporNombre(char peliculas[][4][40]) {
